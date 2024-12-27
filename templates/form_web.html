@@ -160,12 +160,6 @@
             background-color: #45a049;
         }
 
-        h1 {
-            color: white;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
         .close-btn {
             position: absolute;
             top: 20px;
@@ -177,24 +171,87 @@
             border: none;
         }
 
-        .back-to-form {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .back-to-form a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.1);
+        .info-overlay {
+            position: fixed;
+            z-index: 2;
+            padding: 20px;
             color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s;
+            font-size: 1.1em;
+            line-height: 1.6;
+            width: 100%;
+            box-sizing: border-box;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 60px;
         }
 
-        .back-to-form a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+        .feature-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            width: 280px;
+            margin: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-card h3 {
+            color: #fff;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 5px;
+        }
+
+        .info-card ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .info-card li {
+            margin: 5px 0;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .info-card li:before {
+            content: "•";
+            position: absolute;
+            left: -15px;
+            color: #4CAF50;
+        }
+
+        .welcome-text {
+            font-size: 2em;
+            margin: 20px 0 40px 0;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .info-card {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .welcome-text {
+                font-size: 1.5em;
+            }
+            
+            .sidebar.active {
+                width: 100%;
+            }
         }
     </style>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js"></script>
@@ -212,6 +269,79 @@
             <a href="https://github.com/Nvcoing" target="_blank">My Profile</a>
         </div>
     </nav>
+
+    <div class="info-overlay">
+        <div class="welcome-text">
+            Laptop Guide
+        </div>
+        <div class="feature-info">
+            <div class="info-card">
+                <h3>Ram</h3>
+                <ul>
+                    <li>Screen Size: 13.3" - 17.3"</li>
+                    <li>Resolution: 1366x768 to 4K</li>
+                    <li>Weight: 1.1kg - 2.5kg</li>
+                    <li>Portable: Choose 13"-14"</li>
+                    <li>Gaming/Work: Choose 15"-17"</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Performance Specs</h3>
+                <ul>
+                    <li>RAM: 4GB to 32GB (8GB min)</li>
+                    <li>Storage: 256GB to 2TB</li>
+                    <li>Processor: 1.8GHz to 4.5GHz</li>
+                    <li>Higher GPU = Better graphics</li>
+                    <li>SSD storage recommended</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Laptop Categories</h3>
+                <ul>
+                    <li>Ultrabook: Thin & light design</li>
+                    <li>Gaming: High performance</li>
+                    <li>Workstation: Professional work</li>
+                    <li>2-in-1: Tablet + Laptop</li>
+                    <li>Notebook: General purpose</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Brand Guide</h3>
+                <ul>
+                    <li>Gaming: MSI, Razer, ASUS ROG</li>
+                    <li>Business: Lenovo, Dell, HP</li>
+                    <li>Premium: Apple, Microsoft</li>
+                    <li>Budget: Acer, ASUS</li>
+                    <li>Choose based on needs</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Operating Systems</h3>
+                <ul>
+                    <li>Windows: Most versatile</li>
+                    <li>macOS: Apple ecosystem</li>
+                    <li>Linux: Development work</li>
+                    <li>Chrome OS: Web-based tasks</li>
+                    <li>No OS: Custom installation</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Quick Tips</h3>
+                <ul>
+                    <li>Check all specifications</li>
+                    <li>Consider future-proof specs</li>
+                    <li>Balance price vs performance</li>
+                    <li>Match specs to your usage</li>
+                    <li>Verify GPU compatibility</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <button class="menu-dots" onclick="toggleSidebar()">
         <span class="dot"></span>
@@ -281,7 +411,6 @@
             document.getElementById("sidebar").classList.toggle("active");
         }
 
-        // Close menus when clicking outside
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.menu-dots') && 
                 !event.target.closest('.sidebar')) {
